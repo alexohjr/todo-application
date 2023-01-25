@@ -3,14 +3,12 @@ package com.heoch.todoapplication.dto;
 
 import com.heoch.todoapplication.model.TodoEntity;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
+@NoArgsConstructor // 변수없는 생성자
+@AllArgsConstructor // 모든 변수 포함한 생성자
+@Data // getter, setter 생략
 public class TodoDTO {
 
     private String id;
@@ -24,6 +22,14 @@ public class TodoDTO {
         this.id = entity.getId();
         this.title = entity.getTitle();
         this.done = entity.isDone();
+    }
+
+    public static TodoEntity toEntity(final TodoDTO dto) {
+        return TodoEntity.builder()
+                .id(dto.getId())
+                .title(dto.getTitle())
+                .done(dto.isDone())
+                .build();
     }
 
 
