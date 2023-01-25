@@ -5,6 +5,7 @@ import com.heoch.todoapplication.dto.TodoDTO;
 import com.heoch.todoapplication.model.TodoEntity;
 import com.heoch.todoapplication.service.TodoService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestController
 @RequestMapping("todo")
 @RequiredArgsConstructor // Service @Autowired 생략 및 final
@@ -31,6 +33,8 @@ public class TodoController {
 
     @PostMapping
     public ResponseEntity<?> createTodo(@RequestBody TodoDTO dto) {
+
+        log.info("##### hihihihi");
         try {
             String temporaryUserId = "temporary-user"; // temporary user id.
 
