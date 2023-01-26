@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '2.7.7'
+	id 'org.springframework.boot' version '2.5.7'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
@@ -29,6 +29,12 @@ dependencies {
 	implementation group: 'com.google.guava', name: 'guava', version: '31.1-jre'
 
 	runtimeOnly 'mysql:mysql-connector-java' // mysql 연동
+
+	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
+	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+
+	implementation 'org.springframework.boot:spring-boot-starter-security' // 스프링 시큐리티
+
 
 }
 

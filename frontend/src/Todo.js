@@ -51,7 +51,7 @@ class Todo extends React.Component {
         const item = this.state.item;
         return (
             <ListItem>
-                <Checkbox checked={item.done} disableRipple onChange={this.checkboxEventHandler}/>
+                <Checkbox checked={item.done} color="primary" disableRipple onChange={this.checkboxEventHandler}/>
                 <ListItemText>
                     <InputBase
                         inputProps={{"aria-label": "naked", readOnly: this.state.readOnly}}
@@ -59,8 +59,8 @@ class Todo extends React.Component {
                         onKeyPress={this.enterKeyEventHandler}
                         onChange={this.editEventHandler}
                         type="text"
-                        id={item.id}    // 각 리스트를 구분하려고 id를 연결
-                        name={item.id}  // 각 리스트를 구분하려고 id를 연결
+                        id={item.todoId}    // 각 리스트를 구분하려고 id를 연결
+                        name={item.todoId}  // 각 리스트를 구분하려고 id를 연결
                         value={item.title}
                         multiline={true}
                         fullWidth={true}

@@ -2,8 +2,8 @@ package com.heoch.todoapplication.service;
 
 import com.heoch.todoapplication.model.TodoEntity;
 import com.heoch.todoapplication.persistence.TodoRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,10 +11,10 @@ import java.util.Optional;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class TodoService {
 
-    @Autowired
-    private TodoRepository repository;
+    private final TodoRepository repository;
 
     public String testService() {
         // TodoEntity 생성
@@ -24,7 +24,7 @@ public class TodoService {
         repository.save(entity);
 
         // TodoEntity 검색
-        TodoEntity savedEntity = repository.findById(entity.getId()).get();
+        TodoEntity savedEntity = repository.findById(entity.getTodoId()).get();
         return savedEntity.getTitle();
 
     }
@@ -35,7 +35,7 @@ public class TodoService {
 
         repository.save(entity);
 
-        log.info("Entity Id : {} is saved", entity.getId());
+        log.info("Entity Id : {} is saved", entity.getTodoId());
 
         return repository.findByUserId(entity.getUserId());
     }
@@ -50,7 +50,7 @@ public class TodoService {
 
         // (2) 넘겨받은 엔티티 id를 이용해 TodoEntity를 가져온다.
         // 존재하지 않는 엔티티는 업데이트할 수 없기 때문이다.
-        final Optional<TodoEntity> original = repository.findById(entity.getId());
+        final Optional<TodoEntity> original = repository.findById(entity.getTodoId());
 
         original.ifPresent(todo ->{
             // (3) 반환된 TodoEntity가 존재하면 값을 새 entity 값으로 덮어 씌운다.
@@ -75,10 +75,10 @@ public class TodoService {
             repository.delete(entity);
         } catch(Exception e) {
             // (3) exception 발생 시 id와 exception을 로깅한다.
-            log.error("error deleting entity {}, {}", entity.getId(), e);
+            log.error("error deleting entity {}, {}", entity.getTodoId(), e);
 
             // (4) 컨트롤러 exception을 보낸다. 데이터베이스 내부 로직을 캡슐화하려면 e를 리턴하지 않고 새 exception 오브젝트를 리턴한다.
-            throw new RuntimeException("error deleting entity " + entity.getId());
+            throw new RuntimeException("error deleting entity " + entity.getTodoId());
         }
 
         // (5) 새 Todo리스트를 가져와 리턴한다.

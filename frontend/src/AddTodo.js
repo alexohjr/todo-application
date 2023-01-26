@@ -1,5 +1,6 @@
 import React, {useCallback, useRef, useLayoutEffect } from "react";
 import { TextField, Paper, Button, Grid } from "@material-ui/core";
+import moment from "moment";
 
 class AddTodo extends React.Component {
     constructor(props) {
@@ -22,8 +23,10 @@ class AddTodo extends React.Component {
             return;
         }
 
+        this.state.item.regDt = new Date();
+
         this.add(this.state.item); // add 함수 사용
-        this.setState({ item: {title: ""}});
+        this.setState({ item: {title: ""}}); // input title 초기화
     }
 
     enterKeyEventHandler = (e) => {
@@ -40,7 +43,7 @@ class AddTodo extends React.Component {
                         <TextField placeholder="Add Todo here" fullWidth onChange={this.onInputChange} value={this.state.item.title} onKeyPress={this.enterKeyEventHandler} />
                     </Grid>
                     <Grid xs={1} md={1} item>
-                        <Button fullWidth color="secondary" variant="outlined" onClick={this.onButtonClick}>
+                        <Button fullWidth color="primary" variant="outlined" onClick={this.onButtonClick}>
                             +
                         </Button>
                     </Grid>
