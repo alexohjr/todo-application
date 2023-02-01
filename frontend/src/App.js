@@ -10,6 +10,7 @@ import { call, signout } from './service/ApiService';
 // import { render } from '@testing-library/react';
 
 // function App() {
+
 //   return (
 //     <div className="App">
 //       <header className="App-header">
@@ -29,6 +30,7 @@ import { call, signout } from './service/ApiService';
 //     </div>
 //   );
 // }
+
 
 
 class App extends React.Component {
@@ -72,8 +74,6 @@ class App extends React.Component {
   }
 
   add = (item) => {
-
-    console.log("addadd : {}", item);
     call("/todo", "POST", item).then((response) => {
       this.setState({items: response.data})
     });
@@ -109,11 +109,11 @@ class App extends React.Component {
         <Toolbar>
           <Grid justifyContent="space-between" container>
             <Grid item>
-              <Typography variant="h6">오늘의 할일</Typography>
+              <Typography variant="h6">Todo</Typography>
             </Grid>
             <Grid>
               <Button color="inherit" onClick={signout}>
-                로그아웃
+                Logout
               </Button>
             </Grid>
           </Grid>

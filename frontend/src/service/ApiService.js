@@ -24,7 +24,6 @@ export function call(api, method, request) {
         // GET method
         options.body = JSON.stringify(request);
     }
-    let httpStatus;
 
     return fetch(options.url, options)
         .then((response) =>

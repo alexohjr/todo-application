@@ -31,6 +31,9 @@ public class UserService {
 
         final UserEntity originalUser = userRepository.findByEmail(email);
 
+        String name = userRepository.getUserNameByUserEmail(email);
+        log.info("##### name :: " + name);
+
         // matches 메서드를 이용해 패스워드가 같은지 확인
         if(originalUser != null && encoder.matches(password, originalUser.getPassword())) {
             return originalUser;

@@ -44,10 +44,10 @@ public class UserController {
                     .userName(registeredUser.getUserName())
                     .build();
 
+            // 사용자 정보는 항상 하나이므로 리스트로 만들어야 하는 ResponseDTO를 사용하지 않고 그냥 UserDTO리턴
             return ResponseEntity.ok().body(responseUserDTO);
         } catch(Exception e) {
-            // 사용자 정보는 항상 하나이므로 리스트로 만들어야 하는 ResponseDTO를 사용하지 않고 그냥 UserDTO 리턴
-            ResponseDTO responseDTO = ResponseDTO.builder().error(e.getMessage()).build();
+            ResponseDTO<String> responseDTO = ResponseDTO.<String>builder().error(e.getMessage()).build();
             return ResponseEntity.badRequest().body(responseDTO);
         }
     }
@@ -55,7 +55,9 @@ public class UserController {
     @PostMapping("/signin")
     public ResponseEntity<?> authenticate(@RequestBody UserDTO userDTO) {
 
-        log.info("##### hihihihihi");
+        log.info("##### signin");
+
+
         UserEntity user = userService.getByCredentials(userDTO.getEmail(), userDTO.getPassword(), passwordEncoder);
         if(user != null) {
             // 토큰 생성
@@ -65,9 +67,10 @@ public class UserController {
                     .id(user.getUserId())
                     .token(token)
                     .build();
+
             return ResponseEntity.ok().body(responseUserDTO);
         } else {
-            ResponseDTO responseDTO = ResponseDTO.builder().error("Login faild.").build();
+            ResponseDTO<String> responseDTO = ResponseDTO.<String>builder().error("Login faild.").build();
             return ResponseEntity.badRequest().body(responseDTO);
         }
     }

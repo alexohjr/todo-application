@@ -6,6 +6,7 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+        // this.reactAlert = this.useAlert;
     }
 
     handleSubmit(event) {
@@ -14,13 +15,18 @@ class Login extends React.Component {
         const email = data.get("email");
         const password = data.get("password");
 
-        if(null == email || null == password) {
-            // ApiService의 signin 메서드를 사용해 로그인
-            signin({email: email, password: password});
-        } else {
-            alert("올바르게 입력하세요.");
+        console.log("email : " + email);
+        console.log("pw : " + password);
 
-        }
+        signin({email: email, password: password});
+
+        // if(null == email || null == password) {
+        //     // ApiService의 signin 메서드를 사용해 로그인
+        //     signin({email: email, password: password});
+        // } else {
+        //     // useAlert().show('fdfd');
+        //     alert("올바르게 입력하세요.");
+        // }
 
     }
 
@@ -30,7 +36,7 @@ class Login extends React.Component {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Typography component="h1" variant="h5">
-                            로그인
+                            Login
                         </Typography>
                     </Grid>
                 </Grid>
@@ -46,7 +52,7 @@ class Login extends React.Component {
                                 required
                                 fullWidth
                                 id="email"
-                                label="이메일 주소"
+                                label="E-mail"
                                 name="email"
                                 autoComplete="email"
                             />
@@ -58,7 +64,7 @@ class Login extends React.Component {
                                 required
                                 fullWidth
                                 id="password"
-                                label="패스워드"
+                                label="Password"
                                 name="password"
                                 type="password"
                                 autoComplete="current-password"
@@ -72,7 +78,7 @@ class Login extends React.Component {
                                 variant="contained"
                                 color="primary"
                             >
-                                로그인
+                                Login
                             </Button>
                         </Grid>
 

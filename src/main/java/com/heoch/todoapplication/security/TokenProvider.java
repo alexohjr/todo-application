@@ -15,12 +15,17 @@ import java.util.Date;
 @Service
 public class TokenProvider {
 
+//    @Value("${SECRET_KEY}")
+//    private final String SECRET_KEY;
+
     private static final String SECRET_KEY = "NMA8JPctFuna59f5";
 
     public String create(UserEntity userEntity) {
         // 기한은 지금부터 1일로 설정
         Date expiryDate = Date.from(
-                Instant.now().plus(1, ChronoUnit.DAYS));
+                Instant.now().plus(7, ChronoUnit.DAYS));
+
+        log.info("##### expiryDate :: " + expiryDate);
 
         /*
         { // header
@@ -36,6 +41,7 @@ public class TokenProvider {
           ~~~
 
          */
+
         // JWT Token 생성
         return Jwts.builder()
                 // header에 들어갈 내용 및 서명을 하기 위한 SECRET_KEY
@@ -46,6 +52,7 @@ public class TokenProvider {
                 .setIssuedAt(new Date()) // iat
                 .setExpiration(expiryDate) // exp
                 .compact();
+
     }
 
     public String validateAndGetUserId(String token) {
