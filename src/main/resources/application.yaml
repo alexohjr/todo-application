@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    activate:
+      on-profile: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: todo-och
+    url: jdbc:mysql://localhost:3306/todo-application?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+    password: '1234'
+  jpa:
+    properties:
+      hibernate:
+        format_sql: 'true'
+    show-sql: 'true'
+    hibernate:
+      ddl-auto: update
+##SECRET_KEY: '"NMA8JPctFuna59f5"'
+
+
